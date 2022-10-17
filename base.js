@@ -47,11 +47,10 @@ while(isNumber == 0)
 }*/
 }
 
-string = prompt("Entrez votre nom")
-player_name = parseInt(string)
+let player_name = prompt("Entrez votre nom")
 
 while (player_name.length > max_name_length)
 {
-    string = prompt("Votre nom est trop long, veuillez en choisir un plus court")
-    player_name = parseInt(string)
+    player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
 }
+console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
