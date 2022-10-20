@@ -36,14 +36,14 @@ while(number != nb)
     else 
     {
         console.log("Bravo vous avez gagné")
+
+        let player_name = prompt("Entrez votre nom")
+
+        while (player_name.length > max_name_length)
+        {
+            player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
+        }
+        console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
     }
-
 }
 
-let player_name = prompt("Entrez votre nom")
-
-while (player_name.length > max_name_length)
-{
-    player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
-}
-console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
