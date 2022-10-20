@@ -1,10 +1,22 @@
+import nbTour from './level.js'
+
 console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
 let nb = Math.floor(Math.random() * 99) + 1;
 console.log(nb)
 let string
 let number
-let attempt = 0;
 
+let attempt = 0
+
+let level
+let nbTourMax
+
+while (nbTourMax == undefined) 
+{
+    console.log("Merci de n'écrire que 1, 2 ou 3")
+    level = prompt("Choisir un niveau (1:Facile 2:Moyen 3:Difficile")
+    nbTourMax = nbTour(level)
+}
 
 // créer et enregistrer le score dans un fichier
 function createFile() {
@@ -36,30 +48,30 @@ let max_attempt = config.max_attempt
 let max_name_length = config.max_name_length
 let max_score_saved = config.max_score_saved
 
-while(number != nb)
+while(number != nb && score<nbTourMax)
 {
-    attempt++
-    if (attempt == max_attempt)
-    { 
-        console.log("Vous avez perdu, le nombre était: " + nb)
-        break
-    }
     string = prompt("Entrez un nombre entre 1 et 99")
     number = parseInt(string)
+    while(isNaN(number) || number < 1 || number > 99 )
+    {
+        console.log("Ecrire uniquement un nombre entre 1 et 99")
+        string = prompt("Entrez un nombre entre 1 et 99")
+        number = parseInt(string)
+    }
     if( number < nb)
     {
         console.log("le nombre que vous cherchez est plus grand")
     }
-
     else if( number > nb)
     {
         console.log("le nombre que vous cherchez est plus petit")
     }
+  attempt++
+}
 
-    else 
-    {
-        console.log("Bravo vous avez gagné")
-        let player_name = prompt("Entrez votre nom")
+if(number == nb)
+{
+          let player_name = prompt("Bravo ! Entrez votre nom :")
 
         while (player_name.length > max_name_length)
         {
@@ -68,6 +80,10 @@ while(number != nb)
         console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
         createFile();
         positonScore();
-    }
 }
 
+if(attempt == nbTourMax)
+{
+    console.log("Perdu !! Le nombre de tour est dépassé")
+    console.log("Vous deviez trouver le nombre " + nb)
+}
