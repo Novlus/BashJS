@@ -8,17 +8,17 @@ let number
 let score = 0
 
 let level
-let tour
+let nbTourMax
 
-while (isNaN(tour) && tour!=1 && tour!=2 && tour!= 3) 
+while (nbTourMax == undefined) 
 {
     console.log("Merci de n'écrire que 1, 2 ou 3")
     level = prompt("Choisir un niveau (1:Facile 2:Moyen 3:Difficile")
-    tour = nbTour(level)
+    nbTourMax = nbTour(level)
 }
 
 
-while(number != nb && score<tour)
+while(number != nb && score<nbTourMax)
 {
     string = prompt("Entrez un nombre entre 1 et 99")
     number = parseInt(string)
@@ -46,25 +46,8 @@ if(number == nb)
     console.log("Bravo vous avez gagné en " + score + " coups")
 }
 
-if(score == tour)
+if(score == nbTourMax)
 {
     console.log("Perdu !! Le nombre de tour est dépassé")
     console.log("Vous deviez trouver le nombre " + nb)
 }
-
-    // else 
-    // {
-    //     console.log("Bravo vous avez gagné")
-    // }
-//let isNumber = 0
-/*if (NaN(number) == true) { // C'est bien un nombre
-    isNumber =0;}
-else{
-    isNumber =1;
-}
-while(isNumber == 0)
-{
-    string = prompt("Entrez un nombre entre 1 et 99")
-    number = parseInt(string)
-}*/
-
