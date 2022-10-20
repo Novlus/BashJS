@@ -7,7 +7,6 @@ let number
 
 import { config } from './config.js';
 
-let attempt = config.attempt
 let max_attempt = config.max_attempt
 let max_name_length = config.max_name_length
 let max_score_saved = config.max_score_saved
