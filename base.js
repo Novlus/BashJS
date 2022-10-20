@@ -3,13 +3,8 @@ let nb = Math.floor(Math.random() * 99) + 1;
 console.log(nb)
 let string
 let number
-let score = 0;
+let attempt = 0;
 
-// nom du joueur
-function getname() {
-    let username = prompt("Quel est votre nom ?");
-    return username;
-}
 
 // créer et enregistrer le score dans un fichier
 function createFile() {
@@ -18,9 +13,9 @@ function createFile() {
         if (err) throw err;
         console.log('Fichier créé !');
     });
-    fs.writeline(score);
+    fs.writeline(attempt);
     fs.writeline(" --- ");
-    fs.writeline(username);
+    fs.writeline(player_name);
     fs.writeline('\n');
 }
 
@@ -34,28 +29,43 @@ function positonScore() {
     });
 }
 
+
+import { config } from './config.js';
+
+let max_attempt = config.max_attempt
+let max_name_length = config.max_name_length
+let max_score_saved = config.max_score_saved
+
 while(number != nb)
 {
+    attempt++
+    if (attempt == max_attempt)
+    { 
+        console.log("Vous avez perdu, le nombre était: " + nb)
+        break
+    }
     string = prompt("Entrez un nombre entre 1 et 99")
     number = parseInt(string)
     if( number < nb)
     {
         console.log("le nombre que vous cherchez est plus grand")
-        score ++;
     }
 
     else if( number > nb)
     {
         console.log("le nombre que vous cherchez est plus petit")
-        score ++;
     }
 
     else 
     {
         console.log("Bravo vous avez gagné")
-        score ++;
-        console.log("Votre score est de " + score)
-        getname();
+        let player_name = prompt("Entrez votre nom")
+
+        while (player_name.length > max_name_length)
+        {
+            player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
+        }
+        console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
         createFile();
         positonScore();
     }
