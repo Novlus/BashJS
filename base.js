@@ -1,47 +1,5 @@
 
 
-/*class Score
-{
-    constructor(name, nb , score)
-    {
-        this.name = name
-        this.nb = nb
-        this.score = score
-        
-    }
-
-    //création d'un tableau de score et ajout du score du joueur
-    //affichage du tableau de score
-    addScore()
-    {
-        //creer une liste vide
-        let score = [];
-        (this.name, this.nb)
-        score.push(this.name, this.nb)
-        this.score = score
-    }
-
-    /*resetScore()
-    {
-       let reset_score = [];
-       this.score = reset_score
-    }*/
-
-    //get score with name of player
-    /*getScore()
-    {
-        let name = prompt("Entrez le nom du joueur dont vous voulez voir le score : ")
-        if (this.score.indexOf(name) != -1)
-        {
-            console.log(this.score[this.score.indexOf(name)], this.score[this.score.indexOf(name)+1])
-        }
-        else
-        {
-            console.log("Le joueur n'existe pas")
-        }
-    }
-}*/
-
 let score = [];
 
 function addScore(score, name,nbTry)
@@ -78,7 +36,7 @@ function reset_score (score)
      console.log(nb)
      let string
      let number
-     let nbTry = 0
+     let nbTry = 1
 
      while(number != nb)// quand le nombre est trouvé on demande le nom du joueur et on l'ajoute dans un tableau
 
