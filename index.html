@@ -3,26 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="quelques exercices de base pour se mettre en jambe">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../../assets/CSS/cssTD7exo1.css">
-  <title>BashToJS</title>
+  <link rel="stylesheet" href="/style.css">
+  <title>Le juste nombre</title>
 </head>
 <body>
-  <!--<input onchange="readFile(this)" type="file">
-  <script>
-    function readFile(input) {
-      let file = input.files[0]; 
-      let fileReader = new FileReader(); 
-      fileReader.readAsText(file); 
-      fileReader.onload = function() {
-        alert(fileReader.result);
-      }; 
-      fileReader.onerror = function() {
-        alert(fileReader.error);
-      }; 
-    }
-  </script> -->
+
+<section> 
+<h1>Le jeu du +/-</h1>
+  <p>Le but du jeu est de trouver le juste nombre en un minimum de coups.</p>
+  <p>Le nombre est compris entre 1 et 99.</p>
+</section> 
+  <fieldset>
+    <legend>Choisir un niveau</legend>
+
+    <div>
+      <input type="radio" name="level" value="1">
+      <label for="facile">Facile</label>
+    </div>
+
+    <div>
+      <input type="radio" name="level" value="2">
+      <label for="moyen">Moyen</label>
+    </div>
+
+    <div>
+      <input type="radio" name="level" value="3">
+      <label for="difficile">Difficile</label>
+    </div>
+</fieldset>
+<div>
+  <fieldset>
+    <legend>Choisir un nombre</legend>
+  <form>
+    <input type="number" name="number" min="1" max="99">
+  <input type="submit" value="Valider">
+  </form>
+  </fieldset>
+</div>
+<div>
+  <fieldset>
+    <legend>Fin du jeu</legend>
+  <form>
+    <input type="text" name="player" placeholder="Votre nom">
+  <input type="submit" value="Valider">
+  </form>
+  </fieldset>
+</div>
 </body>
+
+
     <script type="text/javascript" src="base.js"></script>
 </html>

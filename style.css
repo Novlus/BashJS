@@ -1,0 +1,12 @@
+h1{
+    font-size: 50px;
+    text-align: center;
+}
+p,
+label {
+    font: 1.2rem 'Arial', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
