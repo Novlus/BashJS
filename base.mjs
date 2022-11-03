@@ -5,11 +5,24 @@ import {getMaxScoreSaved} from './config.mjs';
 
 let score = [];
 
-function saveScore() {
-    localStorage.setItem(score);
+localStorage.setItem('name', []);
+localStorage.setItem('score', []);
+
+function saveScore(score, name) {
+
+    let name = localStorage.getItem('name');
+    let score = localStorage.getItem('score');
+    for (let i = 0; i < score.length; i++) {
+        score.push(score[i], score[i + 1]);
+    }
+    for (let i = 0; i < name.length; i++) {
+        name.push(name[i], name[i + 1]);
+    }
+
+    localStorage.setItem('score', 'name');
 }
 
-let affScore = localStorage.getItem('score');
+let affScore = localStorage.getItem('score', 'name');
 
 function addScore(score, name,nbTry)
 {
@@ -111,7 +124,7 @@ else if(number == nb)
             player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
         }
         console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
-        saveScore(score);
+        saveScore(score, player_name);
 
         if (score.length ==  max_score_saved*2)
         {
