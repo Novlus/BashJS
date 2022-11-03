@@ -49,21 +49,17 @@ function getScore(score) {
     }
 }
 
-function reset_score(score) {
-    score = [];
 
+function getAllScore(score)
+{
+    console.log(score)
 }
 
-function run() {
-    console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
-    let nb = Math.floor(Math.random() * 99) + 1;
-    console.log(nb)
-    let number
-    let attempt = 0
-    let max_attempt
+function reset_score (score)
+{
+    score = [];
+}
 
-    console.log("Merci de n'écrire que 1, 2 ou 3")
-    //level EventListener
     let checkbox = document.querySelectorAll("input[type=radio]");
     for (let check of checkbox) {
         check.addEventListener('change', function () {
@@ -92,9 +88,39 @@ function run() {
             document.getElementById("choix").style.display = "none";
             document.getElementById("perdu").style.display = "block";
         }
+
+        else{
+            addScore(score, player_name, attempt)
+            console.log("Voulez vous connaitre le score de quelqu'un ? (o/n)\n")
+            let answer = prompt()
+            if (answer == "o" || answer == "O")
+            {
+                getScore(score)
+            }
+
+            console.log("Voulez vous connaitre le tableau des scores ? (o/n)\n")
+            answer = prompt()
+            if (answer == "o" || answer == "O")
+            {
+                getAllScore(score)
+            }
+
+            console.log("Voulez vous videz le tableau des scores ? (o/n)\n")
+            answer = prompt()
+            if (answer == "o" || answer == "O")
+            {
+                score = reset_score(score)
+                console.log("Le tableau des scores a été vidé")
+                console.log(score)
+            }
+
+            /*createFile();
+            positonScore();*/
+
         else if (number > nb) {
             document.getElementById("plus").style.display = "none";
             document.getElementById("moins").style.display = "block";
+
         }
         else if (number < nb) {
             document.getElementById("moins").style.display = "none";
