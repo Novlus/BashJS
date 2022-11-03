@@ -1,13 +1,19 @@
-import nbTour from './level.mjs'
-import getMaxAttempt from './config.mjs';
-import {getMaxNameLength} from './config.mjs';
-import {getMaxScoreSaved} from './config.mjs';
+import { max_attempt_facile, max_attempt_moyen, max_attempt_difficile, max_name_length, max_score_saved } from "./config.mjs"
 
-let score = [];
+function setDifficulty(level) {
+    if (level == 1) {
+        return max_attempt_facile
+    }
+    else if (level == 2) {
+        return max_attempt_moyen
+    }
+    else if (level == 3) {
+        return max_attempt_difficile
+    }
+}
 
-function addScore(score, name,nbTry)
-{
-    score.push(name,nbTry)
+function addScore(score, name, nbTry) {
+    score.push(name, nbTry)
 }
 
 // créer et enregistrer le score dans un fichier
@@ -33,18 +39,16 @@ function positonScore() {
     });
 }
 
-function getScore(score)
-{
+function getScore(score) {
     let name = prompt("Entrez le nom du joueur dont vous voulez voir le score : ")
-    if (score.indexOf(name) != -1)
-    {
-        console.log(score[score.indexOf(name)], score[score.indexOf(name)+1])
+    if (score.indexOf(name) != -1) {
+        console.log(score[score.indexOf(name)], score[score.indexOf(name) + 1])
     }
-    else
-    {
+    else {
         console.log("Le joueur n'existe pas")
     }
 }
+
 
 function getAllScore(score)
 {
@@ -54,84 +58,37 @@ function getAllScore(score)
 function reset_score (score)
 {
     score = [];
-
 }
 
-function run(){
-    console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
-    let nb = Math.floor(Math.random() * 99) + 1;
-    console.log(nb)
-    let string
-    let number
-
-    let attempt = 0
-
-    let level
-    let nbTourMax
-
-while (nbTourMax == undefined) 
-{
-    console.log("Merci de n'écrire que 1, 2 ou 3")
-    level = prompt("Choisir un niveau (1:Facile 2:Moyen 3:Difficile)")
-    nbTourMax = nbTour(level)
-}
-
-
-
-let max_attempt = getMaxAttempt()
-let max_name_length = getMaxNameLength()
-let max_score_saved = getMaxScoreSaved()
-
-while(number != nb && attempt<nbTourMax)
-{
-    string = prompt("Entrez un nombre entre 1 et 99")
-    number = parseInt(string)
-    while(isNaN(number) || number < 1 || number > 99 )
-    {
-        console.log("Ecrire uniquement un nombre entre 1 et 99")
-        string = prompt("Entrez un nombre entre 1 et 99")
-        number = parseInt(string)
-    }
-    if( number < nb)
-    {
-        console.log("le nombre que vous cherchez est plus grand")
-    }
-    else if( number > nb)
-
-    {
-        console.log("le nombre que vous cherchez est plus petit")
-    }
-    attempt++
-}
-  
-
-
-if(attempt >= nbTourMax)
-{
-    console.log("Perdu !! Le nombre de tour est dépassé")
-    console.log("Vous deviez trouver le nombre " + nb)
-}
-
-else if(number == nb)
-{        
-        //console.log("test")
-        let player_name = prompt("Bravo ! Entrez votre nom :")
-        
-    
-        while (player_name.length > max_name_length)
-        {
-            player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
-        }
-        console.log("Bravo " + player_name + " vous avez gagné en " + attempt + " coups")
-        if (score.length ==  max_score_saved*2)
-        {
-            console.log("Le tableau des scores est plein, veuillez en vider le tableau des scores pour en ajouter de nouveaux\nVoulez vous vider le tableau des scores ? (o/n)")
-            let answer = prompt()
-            if (answer == "o" || answer == "O")
-            {
-                reset_score(score)
+    let checkbox = document.querySelectorAll("input[type=radio]");
+    for (let check of checkbox) {
+        check.addEventListener('change', function () {
+            if (this.checked) {
+                console.log(this.value);
+                max_attempt = setDifficulty(this.value)
+                document.getElementById("niveau").style.display = "none";
+                document.getElementById("choix").style.display = "block";
             }
+        });
+    }
+    document.getElementById("valider-choix").addEventListener("click", function () {
+        number = document.getElementById("number").value
+
+        if (number == nb) {
+            document.getElementById("plus").style.display = "none";
+            document.getElementById("moins").style.display = "none";
+            document.getElementById("gagne").style.display = "block";
+            document.getElementById("choix").style.display = "none";
+            document.getElementById("fin").style.display = "block";
         }
+        else if (attempt >= max_attempt - 1) {
+            console.log("Vous avez perdu !")
+            document.getElementById("plus").style.display = "none";
+            document.getElementById("moins").style.display = "none";
+            document.getElementById("choix").style.display = "none";
+            document.getElementById("perdu").style.display = "block";
+        }
+
         else{
             addScore(score, player_name, attempt)
             console.log("Voulez vous connaitre le score de quelqu'un ? (o/n)\n")
@@ -159,12 +116,43 @@ else if(number == nb)
 
             /*createFile();
             positonScore();*/
+
+        else if (number > nb) {
+            document.getElementById("plus").style.display = "none";
+            document.getElementById("moins").style.display = "block";
+
         }
+        else if (number < nb) {
+            document.getElementById("moins").style.display = "none";
+            document.getElementById("plus").style.display = "block";
+        }
+        else {
+            console.log("????")
+        }
+        attempt++
+        console.log("Il y a: " + attempt + " tentatives");
+        console.log(number)
 
-}
- 
+    })
 
+    document.getElementById("valider-nom").addEventListener("click", function () {
+        let player_name = document.getElementById("player").value
+        console.log(max_name_length)
+        console.log(player_name.length)
+        if (player_name.length > max_name_length) {
+            document.getElementById("nom-invalid").style.display = "block";
+        } else {
+            document.getElementById("nom-invalid").style.display = "none";
+            document.getElementById("nom-valid").innerHTML = "<p>Bravo " + player_name + " ! Vous avez gagné en " + attempt + " tentatives !</p>";
+            document.getElementById("nom-valid").style.display = "block";
+            document.getElementById("fin").style.display = "none";
+            document.getElementById("gagne").style.display = "none";
+        }
+    })
 
+        /*createFile();
+        positonScore();*/
+   // }
 
 }
 

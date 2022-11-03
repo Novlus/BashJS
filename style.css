@@ -1,0 +1,65 @@
+fieldset {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 10px;
+    background-color: #eee;
+}
+
+#choix,
+#fin {
+    display: none;
+}
+
+#plus,
+#moins,
+#gagne,
+#perdu,
+#nom-invalid,
+#nom-valid {
+    display: none;
+    padding: 5px;
+}
+
+#plus {
+    border: 3px solid orange;
+    background-color: rgb(255, 220, 155);
+}
+
+#moins {
+    border: 3px solid blue;
+    background-color: rgb(200, 200, 255);
+}
+
+#gagne {
+    border: 3px solid green;
+    background-color: rgb(200, 255, 200);
+}
+
+#perdu {
+    border: 3px solid red;
+    background-color: rgb(255, 200, 200);
+}
+
+#nom-invalid {
+    border: 3px solid red;
+    background-color: rgb(255, 200, 200);
+}
+
+#nom-valid {
+    border: 3px solid green;
+    background-color: rgb(200, 255, 200);
+}
+
+h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+p,
+label {
+    font: 1.2rem 'Arial', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
