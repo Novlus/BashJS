@@ -46,6 +46,11 @@ function getScore(score)
     }
 }
 
+function getAllScore(score)
+{
+    console.log(score)
+}
+
 function reset_score (score)
 {
     score = [];
@@ -73,9 +78,9 @@ while (nbTourMax == undefined)
 
 
 
-let max_attempt = getMaxAttempt
-let max_name_length = getMaxNameLength
-let max_score_saved = getMaxScoreSaved
+let max_attempt = getMaxAttempt()
+let max_name_length = getMaxNameLength()
+let max_score_saved = getMaxScoreSaved()
 
 while(number != nb && attempt<nbTourMax)
 {
@@ -90,17 +95,16 @@ while(number != nb && attempt<nbTourMax)
     if( number < nb)
     {
         console.log("le nombre que vous cherchez est plus grand")
-        attempt++
     }
     else if( number > nb)
 
     {
         console.log("le nombre que vous cherchez est plus petit")
-        attempt++
     }
+    attempt++
 }
   
-attempt++
+
 
 if(attempt >= nbTourMax)
 {
@@ -109,9 +113,11 @@ if(attempt >= nbTourMax)
 }
 
 else if(number == nb)
-{
+{        
+        //console.log("test")
         let player_name = prompt("Bravo ! Entrez votre nom :")
-
+        
+    
         while (player_name.length > max_name_length)
         {
             player_name = prompt("Votre nom est trop long, veuillez en choisir un plus court")
@@ -135,11 +141,20 @@ else if(number == nb)
                 getScore(score)
             }
 
+            console.log("Voulez vous connaitre le tableau des scores ? (o/n)\n")
+            answer = prompt()
+            if (answer == "o" || answer == "O")
+            {
+                getAllScore(score)
+            }
+
             console.log("Voulez vous videz le tableau des scores ? (o/n)\n")
             answer = prompt()
             if (answer == "o" || answer == "O")
             {
-                reset_score(score)
+                score = reset_score(score)
+                console.log("Le tableau des scores a été vidé")
+                console.log(score)
             }
 
             /*createFile();
