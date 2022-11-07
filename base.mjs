@@ -172,7 +172,7 @@ function reset_score() {
 }*/
 
 //let affScore = localStorage.getItem('score', 'name');
-function run() {
+export function run() {
     console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
     let nb = Math.floor(Math.random() * 99) + 1;
     console.log(nb)
@@ -273,7 +273,14 @@ function run() {
 
                             }
                             else {
-
+                                document.getElementById("tousScore").style.display = "block";
+                                document.getElementById("tousScore").innerHTML = "<p>Voulez vous voir le tableau des scores ? (O/N) : </p>  <input type='text' id='choixTousScore' name ='choixTousScore' placeholder='(O/N)'> <input type='button' id='valider-tousScore' value='Valider'>";
+                                document.getElementById("valider-tousScore").addEventListener("click", function () {
+                                let answer2 = document.getElementById("choixTousScore").value
+                                if (answer2 == "o" || answer2 == "O")
+                                {
+                                    getAllScore(score)
+                                }})
                                 
                             }
 
@@ -318,4 +325,4 @@ function run() {
 
 
 
-run();
+//run();
