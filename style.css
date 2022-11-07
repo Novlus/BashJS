@@ -15,9 +15,20 @@ fieldset {
 #gagne,
 #perdu,
 #nom-invalid,
-#nom-valid {
+#nom-valid,
+#score,
+#joueurScore,
+#ScorePlein,
+#tousScore,
+#viderTableauScore
+ {
     display: none;
     padding: 5px;
+}
+
+#score-reponse2
+{
+    width: 50%;
 }
 
 #plus {

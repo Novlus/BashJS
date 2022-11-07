@@ -21,17 +21,17 @@
 
     <div>
       <input type="radio" name="level" value="1">
-      <label for="facile">Facile</label>
+      <label for="facile">Facile (15 essais)</label>
     </div>
 
     <div>
       <input type="radio" name="level" value="2">
-      <label for="moyen">Moyen</label>
+      <label for="moyen">Moyen (10 essais)</label>
     </div>
 
     <div>
       <input type="radio" name="level" value="3">
-      <label for="difficile">Difficile</label>
+      <label for="difficile">Difficile (5 essais)</label>
     </div>
   </fieldset>
   <div>
@@ -66,8 +66,47 @@
     <div id="nom-invalid">
       <p>Votre nom est trop grand veuillez en choisir un autre</p>
     </div>
-    <div id="nom-valid"/>
+    <div id="nom-valid"> </div>
   </div>
+      <fieldset id="score">
+        <legend>Voulez vous connaitre le score de quelqu'un ? (o/n)</legend>
+    
+        <div>
+          <input  type="radio" name="choix-oui-non" value="o">
+          <label for="choix-oui">Oui</label>
+        </div>
+    
+        <div>
+          <input   type="radio" name="choix-oui-non" value="n">
+          <label for="choix-non">Non</label>
+        </div>
+  
+      </fieldset>
+
+  <div id="joueurScore">
+    <form>
+      <input type="text" placeholder="Donnez le pseudo du joueur dont vous voulez connaitre le score" name="score-reponse2" id="score-reponse2">
+      <input type="button" id="valider-score2" value="Valider">
+      
+    </form>
+  </div>
+
+  <div id="scoreJoueur">
+    
+  </div>
+
+  <div id ="ScorePlein">
+
+  </div>
+
+  <div id="tousScore">
+
+  </div>
+
+  <div id="viderTableauScore">
+    
+  </div>
+    
 </body>
 <script type="module" src="base.mjs"></script>
 
