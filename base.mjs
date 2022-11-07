@@ -20,11 +20,23 @@ function ouiNon(param) {
         return false;
     }
 }
-
-let score = [] ;
+if(sessionStorage.getItem("score") == null) 
+{
+    let score = {Sarah:3,Damien:10,Alain:15} ;
+}
+else
+{
+    console.log(sessionStorage);
+    let score = sessionStorage;
+}
 
 function addScore(score, name, nbTry) {
-    score.push(String(name), String(nbTry))
+    console.log(sessionStorage)
+    console.log(score)
+    sessionStorage.setItem(name ,nbTry);
+    console.log(sessionStorage)
+    console.log(score)
+    
 }
 
 // créer et enregistrer le score dans un fichier
@@ -50,6 +62,33 @@ function positonScore() {
     });
 }
 
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        if(cls == 'key')
+        {
+            return '<span class="' + cls + '">' + match + '</span>';
+        }
+        return '<span class="' + cls + '">' + match + '</span> <br>';
+    });
+}
+
+
 function getScore(score) {
     document.getElementById("score").style.display = "none";
     document.getElementById("joueurScore").style.display = "block";
@@ -58,12 +97,11 @@ function getScore(score) {
         name = document.getElementById("score-reponse2").value;
         String(name);
         console.log(name)
-        console.log(score.indexOf(name))
+        console.log(sessionStorage.getItem(name))
 
         document.getElementById("scoreJoueur").style.display = "block";
-        if (score.indexOf(name) != -1) {
-            document.getElementById("scoreJoueur").innerHTML += "<p>"+score[score.indexOf(name)] +" "+score[score.indexOf(name) + 1]+"</p>"
-            console.log(score[score.indexOf(name) + 1])
+        if (sessionStorage.getItem(name) != null) {
+            document.getElementById("scoreJoueur").innerHTML += "<p>" + name +": "+sessionStorage.getItem(name) +  "</p>"
             document.getElementById("joueurScore").style.display = "none";
         }
         else {
@@ -86,8 +124,9 @@ function getScore(score) {
 function getAllScore(score) {
     document.getElementById("nom-valid").style.display = "none";
     document.getElementById("scoreJoueur").style.display = "none";
-    document.getElementById("tousScore").innerHTML = "Voici les scores : " + score;
+    document.getElementById("tousScore").innerHTML = "Voici les scores : " + syntaxHighlight(sessionStorage);
     console.log(score)
+
     document.getElementById("viderTableauScore").style.display = "block";
                 document.getElementById("viderTableauScore").innerHTML = "<p>Voulez vous vider le tableau des scores ? (o/n)</p> <input type='text' id='choixViderScore2' name ='choixViderScore2' placeholder='(O/N)'> <input type='button' id='valider-reset2' value='Valider'>";
                 document.getElementById("valider-reset2").addEventListener("click", function () {
@@ -95,13 +134,13 @@ function getAllScore(score) {
                 if (answer2 == "o" || answer2 == "O")
                 {
                     document.getElementById("tousScore").style.display = "none";
-                    reset_score(score)
-                    document.getElementById("viderTableauScore").innerHTML = "<p>Le tableau des scores a été vidé</p>";
+                    reset_score()
+                    document.getElementById("viderTableauScore").innerHTML = "<p>Le tableau des scores a était vidé</p>";
                 }})
 }
 
-function reset_score(score) {
-    score = [];
+function reset_score() {
+    sessionStorage.clear();
 }
 
 
@@ -132,7 +171,7 @@ function reset_score(score) {
     console.log(localStorage.getItem('name'));
 }*/
 
-let affScore = localStorage.getItem('score', 'name');
+//let affScore = localStorage.getItem('score', 'name');
 function run() {
     console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
     let nb = Math.floor(Math.random() * 99) + 1;
@@ -212,7 +251,7 @@ function run() {
                 let answer2 = document.getElementById("choixViderScore").value
                 if (answer2 == "o" || answer2 == "O")
                 {
-                    reset_score(score)
+                    reset_score()
                     document.getElementById("ScorePlein").innerHTML = "<p>Le tableau des scores a été vidé</p>";
                 }})
             }
@@ -233,6 +272,11 @@ function run() {
                                 getScore(score)
 
                             }
+                            else {
+
+                                
+                            }
+
                         }
                     });
                 }
