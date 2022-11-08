@@ -1,6 +1,6 @@
 import { max_attempt_facile, max_attempt_moyen, max_attempt_difficile, max_name_length, max_score_saved } from "./config.mjs"
 
-function setDifficulty(level) {
+export function setDifficulty(level) {
     if (level == 1) {
         return max_attempt_facile
     }
@@ -12,7 +12,7 @@ function setDifficulty(level) {
     }
 }
 
-function ouiNon(param) {
+export function ouiNon(param) {
     if (param == "o") {
         return true;
     }
@@ -20,17 +20,17 @@ function ouiNon(param) {
         return false;
     }
 }
-if(sessionStorage.getItem("score") == null) 
-{
-    let score = {Sarah:3,Damien:10,Alain:15} ;
-}
-else
-{
-    console.log(sessionStorage);
-    let score = sessionStorage;
-}
+// if(sessionStorage.getItem("score") == null) 
+// {
+//     let score = {Sarah:3,Damien:10,Alain:15} ;
+// }
+// else
+// {
+    // console.log(sessionStorage);
+    // let score = sessionStorage;
+// }
 
-function addScore(score, name, nbTry) {
+export function addScore(score, name, nbTry) {
     console.log(sessionStorage)
     console.log(score)
     sessionStorage.setItem(name ,nbTry);
@@ -139,7 +139,7 @@ function getAllScore(score) {
                 }})
 }
 
-function reset_score() {
+export function reset_score() {
     sessionStorage.clear();
 }
 
