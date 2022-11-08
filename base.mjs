@@ -21,10 +21,10 @@ function ouiNon(param) {
     }
 }
 
-let score = [] ;
+let score = localStorage ;
 
-function addScore(score, name, nbTry) {
-    score.push(String(name), String(nbTry))
+function addScore(name, nbTry) {
+    score.setItem(name, nbTry)
 }
 
 // créer et enregistrer le score dans un fichier
@@ -58,12 +58,12 @@ function getScore(score) {
         name = document.getElementById("score-reponse2").value;
         String(name);
         console.log(name)
-        console.log(score.indexOf(name))
+        console.log(score[name])
 
         document.getElementById("scoreJoueur").style.display = "block";
-        if (score.indexOf(name) != -1) {
-            document.getElementById("scoreJoueur").innerHTML += "<p>"+score[score.indexOf(name)] +" "+score[score.indexOf(name) + 1]+"</p>"
-            console.log(score[score.indexOf(name) + 1])
+        if (score[name] != null) {
+            document.getElementById("scoreJoueur").innerHTML += "<p>"+score[name] +" "+ name +"</p>"
+            // console.log(score[score.indexOf(name) + 1])
             document.getElementById("joueurScore").style.display = "none";
         }
         else {
@@ -86,7 +86,11 @@ function getScore(score) {
 function getAllScore(score) {
     document.getElementById("nom-valid").style.display = "none";
     document.getElementById("scoreJoueur").style.display = "none";
-    document.getElementById("tousScore").innerHTML = "Voici les scores : " + score;
+    let allScores = document.getElementById("tousScore") 
+    allScores.innerHTML = "Voici les scores : "
+    for( let i = 0; i < score.length; i++){
+        allScores.innerHTML +=  "<br>" + score.key(i) + " " + score[score.key(i)];
+    }
     console.log(score)
     document.getElementById("viderTableauScore").style.display = "block";
                 document.getElementById("viderTableauScore").innerHTML = "<p>Voulez vous vider le tableau des scores ? (o/n)</p> <input type='text' id='choixViderScore2' name ='choixViderScore2' placeholder='(O/N)'> <input type='button' id='valider-reset2' value='Valider'>";
@@ -101,7 +105,7 @@ function getAllScore(score) {
 }
 
 function reset_score(score) {
-    score = [];
+    score.clear()
 }
 
 
@@ -132,7 +136,7 @@ function reset_score(score) {
     console.log(localStorage.getItem('name'));
 }*/
 
-let affScore = localStorage.getItem('score', 'name');
+// let affScore = localStorage.getItem('score', 'name');
 function run() {
     console.log("Vous allez devoir trouver 1 nombre aléatoire entre 1 et 99: \n-----------------")
     let nb = Math.floor(Math.random() * 99) + 1;
@@ -220,7 +224,7 @@ function run() {
                 {
                 document.getElementById("nom-valid").style.display = "block";
                 document.getElementById("score").style.display = "block";
-                addScore(score, player_name, attempt)
+                addScore(player_name, attempt)
                 let checkbox2 = document.querySelectorAll("input[name=choix-oui-non]");
                 let answer
                 for (let check of checkbox2) {
